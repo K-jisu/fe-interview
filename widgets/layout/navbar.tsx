@@ -18,12 +18,24 @@ const Navbar = () => {
   const isActive = (href: string) => pathname === href;
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <nav
+      className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60"
+      aria-label="Main navigation"
+    >
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* 로고 */}
           <Link href="/" className="flex items-center space-x-2">
-            <Image src={"/code-icon.png"} alt="Logo" width={30} height={30} />
+            <Image
+              src={"/code-icon.png"}
+              alt="FronterView Logo"
+              width={30}
+              height={30}
+              priority
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+              }}
+            />
             <span className="text-lg font-semibold">FronterView</span>
           </Link>
 
