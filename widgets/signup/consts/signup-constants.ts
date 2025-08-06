@@ -1,0 +1,21 @@
+export const signupConstants = {
+  signupHeader: "환영합니다!",
+  signupDescription: "페이지를 계속 이용하려면 회원가입해 주세요.",
+  signupForm: {
+    signupTitle: "회원가입",
+    signupDescription: "계정 정보를 입력해 주세요",
+    nameLabel: "이름",
+    namePlaceholder: "이름을 입력해 주세요",
+    emailLabel: "이메일",
+    emailPlaceholder: "이메일을 입력해 주세요",
+    passwordLabel: "비밀번호",
+    passwordPlaceholder: "비밀번호를 입력해 주세요",
+    confirmPasswordLabel: "비밀번호 확인",
+    confirmPasswordPlaceholder: "비밀번호를 다시 입력해 주세요",
+    signupButton: "회원가입",
+    signupLoading: "회원가입 중...",
+    googleLogin: "Google로 계속하기",
+    alreadyHaveAccount: "이미 계정이 있으신가요?",
+    login: "로그인",
+  },
+};
