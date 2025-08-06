@@ -13,6 +13,7 @@ import { Mail } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { signupConstants } from "../consts/signup-constants";
 
 type signupFormValues = {
   name: string;
@@ -30,8 +31,10 @@ const SignupForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Sign Up</CardTitle>
-        <CardDescription>Create your account to get started</CardDescription>
+        <CardTitle>{signupConstants.signupForm.signupTitle}</CardTitle>
+        <CardDescription>
+          {signupConstants.signupForm.signupDescription}
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <form
@@ -41,47 +44,57 @@ const SignupForm = () => {
           className="space-y-4"
         >
           <div className="space-y-2">
-            <Label htmlFor="name">Full Name</Label>
+            <Label htmlFor="name">
+              {signupConstants.signupForm.nameLabel}
+            </Label>
             <Input
               id="name"
               type="text"
-              placeholder="Enter your full name"
+              placeholder={signupConstants.signupForm.namePlaceholder}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">
+              {signupConstants.signupForm.emailLabel}
+            </Label>
             <Input
               id="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder={signupConstants.signupForm.emailPlaceholder}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">
+              {signupConstants.signupForm.passwordLabel}
+            </Label>
             <Input
               id="password"
               type="password"
-              placeholder="Create a password"
+              placeholder={signupConstants.signupForm.passwordPlaceholder}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <Label htmlFor="confirmPassword">
+              {signupConstants.signupForm.confirmPasswordLabel}
+            </Label>
             <Input
               id="confirmPassword"
               type="password"
-              placeholder="Confirm your password"
+              placeholder={signupConstants.signupForm.confirmPasswordPlaceholder}
               required
             />
           </div>
 
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Creating account..." : "Create Account"}
+            {isLoading
+              ? signupConstants.signupForm.signupLoading
+              : signupConstants.signupForm.signupButton}
           </Button>
         </form>
 
@@ -89,13 +102,15 @@ const SignupForm = () => {
 
         <Button variant="outline" className="w-full bg-transparent">
           <Mail className="mr-2 h-4 w-4" />
-          Continue with Google
+          {signupConstants.signupForm.googleLogin}
         </Button>
 
         <div className="text-center text-sm">
-          <span className="text-gray-600">Already have an account? </span>
+          <span className="text-gray-600">
+            {signupConstants.signupForm.alreadyHaveAccount}
+          </span>
           <Link href="/login" className="text-blue-600 hover:underline">
-            Sign in
+            {signupConstants.signupForm.login}
           </Link>
         </div>
       </CardContent>
