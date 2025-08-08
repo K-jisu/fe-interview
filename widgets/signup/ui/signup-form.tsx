@@ -13,7 +13,9 @@ import { Mail } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { signupConstants } from "../consts/signup-constants";
+import signupValidation from "../model/signup-validation";
 
 type signupFormValues = {
   name: string;
@@ -24,9 +26,16 @@ type signupFormValues = {
 
 const SignupForm = () => {
   const {
+    register,
     handleSubmit,
-    formState: { isLoading },
-  } = useForm<signupFormValues>();
+    formState: { errors, isLoading },
+  } = useForm<signupFormValues>({
+    resolver: zodResolver(signupValidation),
+  });
+
+  const onSubmit = (data: signupFormValues) => {
+    console.log("form submitted", data);
+  };
 
   return (
     <Card>
@@ -37,22 +46,18 @@ const SignupForm = () => {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <form
-          onSubmit={handleSubmit(() => {
-            console.log("form submitted");
-          })}
-          className="space-y-4"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">
-              {signupConstants.signupForm.nameLabel}
-            </Label>
+            <Label htmlFor="name">{signupConstants.signupForm.nameLabel}</Label>
             <Input
               id="name"
               type="text"
               placeholder={signupConstants.signupForm.namePlaceholder}
-              required
+              {...register("name")}
             />
+            {errors.name && (
+              <p className="text-sm text-red-500">{errors.name.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -63,8 +68,11 @@ const SignupForm = () => {
               id="email"
               type="email"
               placeholder={signupConstants.signupForm.emailPlaceholder}
-              required
+              {...register("email")}
             />
+            {errors.email && (
+              <p className="text-sm text-red-500">{errors.email.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -75,8 +83,11 @@ const SignupForm = () => {
               id="password"
               type="password"
               placeholder={signupConstants.signupForm.passwordPlaceholder}
-              required
+              {...register("password")}
             />
+            {errors.password && (
+              <p className="text-sm text-red-500">{errors.password.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -86,9 +97,16 @@ const SignupForm = () => {
             <Input
               id="confirmPassword"
               type="password"
-              placeholder={signupConstants.signupForm.confirmPasswordPlaceholder}
-              required
+              placeholder={
+                signupConstants.signupForm.confirmPasswordPlaceholder
+              }
+              {...register("confirmPassword")}
             />
+            {errors.confirmPassword && (
+              <p className="text-sm text-red-500">
+                {errors.confirmPassword.message}
+              </p>
+            )}
           </div>
 
           <Button type="submit" className="w-full" disabled={isLoading}>
