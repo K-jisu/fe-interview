@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupConstants } from "../consts/signup-constants";
 import signupValidation from "../model/signup-validation";
+import signup from "../api/signup";
 
 type signupFormValues = {
   name: string;
@@ -34,7 +35,7 @@ const SignupForm = () => {
   });
 
   const onSubmit = (data: signupFormValues) => {
-    console.log("form submitted", data);
+    signup(data.email, data.password);
   };
 
   return (
